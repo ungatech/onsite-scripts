@@ -24,4 +24,4 @@ wget -qO- https://raw.githubusercontent.com/ungatech/onsite-scripts/refs/heads/m
 ```
 
 ---
-![Ungatech Logo](https://unga.tech/img/logo_inlinegreen-25.png)
+[![Ungatech Logo](https://unga.tech/img/logo_inlinegreen-25.png)](https://unga.tech)
