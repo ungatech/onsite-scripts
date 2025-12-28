@@ -1,20 +1,27 @@
-# Ungatech RustDesk Deployment Script (Linux/Flatpak)
+# Ungatech Onsite Deployment Scripts
+This repository contains streamlined deployment scripts for the [RustDesk](https://rustdesk.com) remote desktop client. These scripts allow Ungatech engineers to quickly provision managed endpoints with pre-configured relay settings.
 
-This repository contains a streamlined deployment script for the [RustDesk](https://rustdesk.com/) remote desktop client optimally on Ubuntu-based Linux distros. 
+## 🛠️ Script Features
+* **Auto-Dependency Check:** Installs Flatpak (Linux) or verifies Winget (Windows).
+* **Persistent Updates:** Flatpak or Winget updates keeps the client current.
+* **Zero-Touch Config:** Pre-sets the relay.unga.tech host and key.
+* **Secure Setup:** Uses masked password prompts with matching verification.
+* **Privacy Focused:** Wipes variables from memory and clears session history.
 
-It automates the installation via **Flatpak** to ensure the client remains updated alongside the system, and it pre-configures the client to connect to a specific self-hosted relay server we use at Ungatech.
+## 🚀 One-Liner Deployments
+### 🪟 Windows (10 / 11)
+Installs via Winget. Automatically handles UAC elevation and applies relay configuration. Run the following from a Win+R (Run Command) prompt:
 
-## Features
-* **Auto-Dependency Check:** Verifies and installs Flatpak/Flathub if missing.
-* **Persistent Updates:** Installs via Flathub so `flatpak update` keeps the client current.
-* **Zero-Touch Config:** Automatically applies the relay server and public key.
-* **Secure Setup:** Includes a double-blind, masked password prompt to set a permanent password for unattended access.
-* **Privacy Focused:** Automatically clears terminal history after execution to prevent password leaks in `~/.bash_history`.
+```powershell
+powershell -Command "irm https://raw.githubusercontent.com/ungatech/onsite-scripts/refs/heads/main/install-rustdesk.bat -OutFile $env:TEMP\ir.bat; & $env:TEMP\ir.bat"
+```
 
-## Usage
-
-### 1. Default Installation (Ungatech Support)
-To install using the default **Ungatech** relay settings, run:
+### 🐧 Linux (Ubuntu / Zorin OS)
+Installs via Flatpak. Verifies Flathub, applies relay configuration, and prompts for a secure password. Run the following from your desktop terminal:
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/ungatech/onsite-scripts/refs/heads/main/install-rustdesk.sh | bash
+```
+
+---
+![Ungatech Logo](https://unga.tech/img/logo_inlinegreen-25.png)
