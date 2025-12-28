@@ -40,11 +40,17 @@ echo Installing/Updating RustDesk...
 winget install --id RustDesk.RustDesk --silent --force --accept-source-agreements --accept-package-agreements
 
 set "RD_EXE=%ProgramFiles%\RustDesk\rustdesk.exe"
+if not exist "!RD_EXE!" (
+    echo [!] Error: RustDesk executable not found at !RD_EXE!
+    pause
+    exit /b
+)
 
 echo Applying Server Configuration...
 "!RD_EXE!" --config "host=!relay_host!,key=!relay_key!"
 
 :passloop
+set "pass1=" & set "pass2="
 echo.
 echo Set the Permanent Password (Input is MASKED):
 for /f "usebackq delims=" %%i in (`powershell -Command "$p = read-host 'Enter Password' -AsSecureString; [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($p))"`) do set "pass1=%%i"
@@ -59,6 +65,7 @@ if "!pass1!"=="!pass2!" (
         goto :success
     )
 )
+set "pass1=" & set "pass2="
 echo.
 echo Error: Passwords do not match or are empty. Try again.
 goto :passloop
