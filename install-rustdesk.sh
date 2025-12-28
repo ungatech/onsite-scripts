@@ -26,8 +26,10 @@ while true; do
     if [ "$pass1" = "$pass2" ] && [ -n "$pass1" ]; then
         echo "Passwords match. Applying configuration..."
         flatpak run com.rustdesk.RustDesk --password "$pass1"
+        pass1="" pass2=""
         break
     else
+        pass1="" pass2=""
         echo "Error: Passwords do not match or are empty. Please try again."
         echo ""
     fi
